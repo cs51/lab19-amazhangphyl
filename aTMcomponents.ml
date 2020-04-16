@@ -39,18 +39,18 @@ let acquire_act () : action =
 
 let get_balance id : int =
   let records = List.filter (fun x -> !x.id = id) !database in
-  if List.length records == 0 then raise (Invalid_argument "Please enter a valid ID")
+  if List.length records == 0 then raise Not_found
   else !(List.nth records 0).balance ;;
 
 let get_name id : string =
   let records = List.filter (fun x -> !x.id = id) !database in
-  if List.length records == 0 then raise (Invalid_argument "Please enter a valid ID")
+  if List.length records == 0 then raise Not_found
   else !(List.nth records 0).name ;;
 
 let update_balance id change : unit =
   let rec helper lst =
     match lst with
-    | [] -> raise (Invalid_argument "Enter a valid ID")
+    | [] -> raise Not_found
     | hd :: tl -> if !hd.id = id then hd := {name = !hd.name; id = !hd.id; balance = change} else helper tl in
   helper !database;;
 
