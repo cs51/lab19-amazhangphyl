@@ -48,11 +48,11 @@ let get_name id : string =
   else !(List.nth records 0).name ;;
 
 let update_balance id change : unit =
-  let rec helper =
-    match !database with
+  let rec helper lst =
+    match lst with
     | [] -> raise (Invalid_argument "Enter a valid ID")
-    | hd :: tl -> if !hd.id = id then hd := {name = !hd.name; id = !hd.id; balance = change} in
-  helper ;;
+    | hd :: tl -> if !hd.id = id then hd := {name = !hd.name; id = !hd.id; balance = change} else helper tl in
+  helper !database;;
 
 let present_message str : unit =
   Printf.printf "%s" str ;;
