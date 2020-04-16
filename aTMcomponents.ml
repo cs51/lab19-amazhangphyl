@@ -39,11 +39,13 @@ let acquire_act () : action =
 
 let get_balance id : int =
   let records = List.filter (fun x -> !x.id = id) !database in
-  !(List.nth records 0).balance ;;
+  if List.length records == 0 then raise (Invalid_argument "Please enter a valid ID")
+  else !(List.nth records 0).balance ;;
 
 let get_name id : string =
   let records = List.filter (fun x -> !x.id = id) !database in
-  !(List.nth records 0).name ;;
+  if List.length records == 0 then raise (Invalid_argument "Please enter a valid ID")
+  else !(List.nth records 0).name ;;
 
 let update_balance id change : unit =
   let rec helper =
