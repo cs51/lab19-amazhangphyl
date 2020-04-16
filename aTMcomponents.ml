@@ -15,23 +15,23 @@ let rec initialize lst : unit =
   | [] -> ()
   | hd :: tl -> database := (!database @ [ref hd]); initialize tl
 
-let acquire_id : id =
+let acquire_id () : id =
   let () = print_string "Enter customer ID: " in
   let i = read_int () in
   i ;;
 
-let acquire_amount : int =
+let acquire_amount () : int =
   let () = print_string "Enter customer amount" in
   let i = read_int () in
   i ;;
 
-let acquire_act : action =
+let acquire_act () : action =
   let () = print_string "Enter customer amount" in
   let s = read_line () in
   match s with
   | "B" -> Balance
-  | "-" -> let amount = acquire_amount in Withdraw amount
-  | "+" -> let amount = acquire_amount in Deposit amount
+  | "-" -> let amount = acquire_amount () in Withdraw amount
+  | "+" -> let amount = acquire_amount () in Deposit amount
   | "=" -> Next
   | "X" -> Finished
   | _ -> raise (Invalid_argument "Please enter a valid character")
