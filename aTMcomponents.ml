@@ -15,17 +15,17 @@ let rec initialize lst : unit =
   | [] -> ()
   | hd :: tl -> database := (!database @ [ref hd]); initialize tl
 
-let acquire_id () : id =
+let acquire_id unit : id =
   let () = print_string "Enter customer ID: " in
   let i = read_int () in
   i ;;
 
-let acquire_amount () : int =
+let acquire_amount unit : int =
   let () = print_string "Enter customer amount" in
   let i = read_int () in
   i ;;
 
-let acquire_act () : action =
+let acquire_act unit : action =
   let () = print_string "Enter customer amount" in
   let s = read_line () in
   match s with
